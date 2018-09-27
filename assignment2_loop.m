@@ -44,4 +44,5 @@ y = [Ay m1y m2y By Ay];
 figure(i);
 plot(x, y);
 
+
 end
