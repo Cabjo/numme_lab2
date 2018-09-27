@@ -9,7 +9,7 @@ m_1 = 1;
 m_2 = 1;
 
 % The Jacobian Matrix
-J = jacobian(u_1, u_2, u_3, L, m_1, m_2);
+J = jac(u_1, u_2, u_3, L, m_1, m_2);
 
 % Vector with the results from the three functions
 func_vector = function_vector(u_1, u_2, u_3, L, m_1, m_2);
