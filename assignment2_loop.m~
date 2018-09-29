@@ -31,10 +31,7 @@ u_1 = u_vector(1);
 u_2 = u_vector(2);
 u_3 = u_vector(3);
 
-u_result_matrix(1,i) = u_1;
-u_result_matrix(2,i) = u_2;
-u_result_matrix(3,i) = u_3;
-
+u_result_matrix(1,i) = u_result_matrix(:,i) + [u_1 u_2 u_3];
 
 Ax = 0;
 Ay = 0;
@@ -52,4 +49,3 @@ plot(x, y);
 
 
 end
-u_result_matrix

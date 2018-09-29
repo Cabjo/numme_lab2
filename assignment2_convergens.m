@@ -3,9 +3,19 @@ u_initial_matrix = [1 1 pi/3 1; 0.5 0.5 pi/3-0.01 0.5; -1 -1 -pi/3 -1];
 u_result_matrix = zeros(size(u_initial_matrix));
 constants = [1 1 2 1; 1 1 1 10; 1 2 1 1];
 
+% To calculate the order of convergence 
+error_u_1 = zeros(50, 4);
+error_u_2 = zeros(50, 4);
+error_u_3 = zeros(50, 4);
+counter_vector = [0 0 0];
+
 for i = 1:4
 u_vector = u_initial_matrix(:,i);
 constant_vector = constants(:,i);
+
+error_u_1(1:i) = u_initial_matrix(1:i);
+error_u_2(1:i) = u_initial_matrix(1:i);
+error_u_3(1:i) = u_initial_matrix(1:i);
 
 % The Jacobian Matrix
 J = jac_matrix(u_vector, constant_vector);
@@ -14,18 +24,29 @@ J = jac_matrix(u_vector, constant_vector);
 func_vector = function_vector_matrix(u_vector, constant_vector);
 
 % J\func_vector is the same as inv_jacobian * function_vector
-u_next_vector = u_vector - J\func_vector;
+d_variabler = J\func_vector;
+u_next_vector = u_vector - d_variabler;
 
-while abs(sum(u_vector - u_next_vector)) > 10^(-3)
+counter = 1;
+
+while max(abs(d_variabler)) > 1e-10
+    counter = counter + 1;
     u_vector = u_next_vector;
+    
+    if counter < 50
+        error_u_1(counter:i) = u_vector(1);
+        error_u_2(counter:i) = u_vector(2);
+        error_u_3(counter:i) = u_vector(3);  
+    end
     
     J = jac_matrix(u_vector, constant_vector);
     
     func_vector = function_vector_matrix(u_vector, constant_vector);
-
-    u_next_vector = u_vector - J\func_vector;
+    
+    d_variabler = J\func_vector;
+    u_next_vector = u_vector - d_variabler;
 end
-
+counter_vector(i) = counter;
 u_vector = u_next_vector;
 u_1 = u_vector(1);
 u_2 = u_vector(2);
@@ -53,3 +74,4 @@ plot(x, y);
 
 end
 u_result_matrix
+counter_vector
