@@ -1,5 +1,5 @@
 % Initial guesses
-u_initial_matrix = [1 1 pi/3 1; 0.5 0.5 pi/3-0.01 0.5; -1 -1 -pi/3 -1];
+u_initial_matrix = [1 1 pi/3 1; 0.5 0.5 pi/3 -0.5; -1 -1 -pi/3 -1];
 u_result_matrix = zeros(size(u_initial_matrix));
 constants = [1 1 2 1; 1 1 1 10; 1 2 1 1];
 
