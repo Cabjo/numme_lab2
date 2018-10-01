@@ -7,8 +7,7 @@ for i = 1:4
 u_vector = u_initial_matrix(:,i);
 constant_vector = constants(:,i);
 
-% The Jacobian Matrix
-J = jac_matrix(u_vector, constant_vector);
+J = jac_matrix(u_vector, constant_vector);  % The Jacobian Matrix
 
 % Vector with the results from the three functions
 func_vector = function_vector_matrix(u_vector, constant_vector);
